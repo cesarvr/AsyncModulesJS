@@ -1,0 +1,94 @@
+<html>
+
+<title> lazy </title>
+
+<body>
+	<p class="titulo">  </p>
+</body>
+
+<script type="text/javascript">
+
+var doc   = window.document;
+var lazy  = lazy || {};
+
+
+(function () {
+
+	var _script = [];
+	var _cnt = 0;
+
+	lazy.loadjs = function(script_list, callback){
+		_script = script_list;
+		
+		lazy.callback = callback;
+		lazy.file_count = script_list.length;
+		lazy.make_tags(_script[_cnt]);
+
+	}
+
+	
+
+	lazy.make_tags = function( tag ){
+			
+			console.log("cargando: " +tag);
+			var _tmp = doc.createElement('script');
+			var that = this; 
+			
+			_tmp.type = "text/javascript";
+			_tmp.onload = _tmp.onreadystatechange = function() { 
+			
+				
+
+				 /* IE 8 */
+				 if(typeof document.attachEvent === "object"){
+				 	console.log("stat: " + _tmp.readyState);
+					
+					if (_tmp.readyState === 'loaded' || _tmp.readyState === 'complete'){
+						
+
+						lazy.file_count--;
+
+						if (lazy.file_count == 0) {
+							that.callback();
+						}else 
+							that.make_tags( _script[  _script.length - lazy.file_count ] );
+
+					 }
+				}else{
+				
+					lazy.file_count--;
+	           		if (lazy.file_count == 0) {
+								that.callback();
+							}else 
+								that.make_tags( _script[  _script.length - lazy.file_count ] );
+	            }
+
+			};	
+		
+	
+
+		_tmp.src = tag;  
+		doc.getElementsByTagName('head')[0].appendChild(_tmp);
+	};
+
+}());
+
+
+
+lazy.loadjs(["//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.js", 
+			 "//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js",
+			 "//cdnjs.cloudflare.com/ajax/libs/json2/20130526/json2.min.js"], function(){
+
+			 	$('.titulo').text("Hello world");
+
+			 var test =	JSON.parse("{\"consultarOperacion\":{\"entrada\":{\"FECHAHASTA\":\"2016-01-01\",\"FECHADESDE\":\"2013-01-01\",\"contrato\":{\"CONTRATO\":{\"CENTRO\":{\"EMPRESA\":\"0049\",\"CENTRO\":null},\"PRODUCTO\":null,\"NUMERO_DE_CONTRATO\":null},\"NUM_EVENTO\":null},\"subTipoContrato\":{\"TIPO_DE_PRODUCTO\":{\"EMPRESA\":null,\"TIPO_DE_PRODUCTO\":null},\"SUBTIPO_DE_PRODUCTO\":null},\"indicadorProducto\":null,\"referenciaInterna\":null,\"portfolio\":null,\"sentido\":null,\"numeroEvento\":null,\"tipoEvento\":null,\"indicadorRegistroAutomatico\":null,\"gestor\":{\"TIPO_DE_PERSONA\":null,\"CODIGO_DE_PERSONA\":null},\"trader\":{\"TIPO_DE_PERSONA\":null,\"CODIGO_DE_PERSONA\":null},\"medioContratacion\":null,\"indicadorOperacion\":null,\"codigoRIG\":null,\"hora\":null,\"opcion\":null},\"paginacion\":{\"memento\":null,\"hasMore\":null}}}");
+
+			 alert(test);
+
+});
+
+
+
+</script>
+
+</html>
