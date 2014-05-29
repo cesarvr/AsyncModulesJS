@@ -9,9 +9,9 @@ Modo de Uso:
 
 o
 
-/*
-    Pegar el codigo aqui. 
-*/
+	/*
+	    codigo fuente 
+	*/
 
 	lazy.loadjs(["//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.js", 
 			       "//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"], 
