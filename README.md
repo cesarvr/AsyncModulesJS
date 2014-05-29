@@ -5,7 +5,7 @@ Es un quick & dirty cargador de modulos en JS, biene bien para cuando se trabaja
 
 Modo de Uso: 
 
-	<script type="text/javascript"  src="lazy.js"></script>
+	<script type="text/javascript" src="lazy.js"></script>
 
 o
 
