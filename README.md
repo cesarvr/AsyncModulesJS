@@ -7,7 +7,7 @@ Modo de Uso:
 
 	<script type="text/javascript" src="lazy.js"></script>
 
-o
+y
 
 	/*
 	    codigo fuente 
